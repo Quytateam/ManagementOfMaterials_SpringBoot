@@ -162,6 +162,13 @@ public class ProductServiceImpl implements ProductService {
         return list;
     }
 
+    @Override
+    public long getQuantityById(long id) {
+        // TODO Auto-generated method stub
+        long quantity = productRepository.getQuantityById(id);
+        return quantity;
+    }
+
 
     
 }

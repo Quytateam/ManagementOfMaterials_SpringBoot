@@ -102,10 +102,12 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <ng-container *ngFor="let item of listDetail">
+                      <ng-container
+                        *ngFor="let item of listDetail; let i = index"
+                      >
                         <tr class="row">
-                          <td class="col-1">{{ item.id }}</td>
-                          <td class="col-5">{{ item.name }}</td>
+                          <td class="col-1">{{ i + 1 }}</td>
+                          <td class="col-5">{{ item.product.name }}</td>
                           <td class="col-2">{{ item.price }}</td>
                           <td class="col-2">{{ item.quantity }}</td>
                           <td class="col-2">{{ item.subTotal }}</td>

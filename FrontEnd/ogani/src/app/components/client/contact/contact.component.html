@@ -1,0 +1,79 @@
+<section
+  class="breadcrumb-section set-bg h-13rem d-flex align-items-center"
+  [ngStyle]="{ backgroundImage: 'url(assets/image/breadcrumb.jpg' }"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="breadcrumb__text">
+          <h2>Liên hệ</h2>
+          <div class="breadcrumb__option">
+            <a routerLink="/">Trang chủ</a>
+            <span>Liên hệ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div>
+  <div class="main">
+    <div class="content">
+      <h2>Không Gian Sống - Liên hệ</h2>
+      <p>
+        Bạn hãy điền nội dung tin nhắn vào form dưới đây và gửi cho chúng tôi.
+        Chúng tôi sẽ trả lời bạn sau khi nhận được.
+      </p>
+      <form action="">
+        <div class="form-top">
+          <div>
+            <label for="name">Họ tên<i class="asterisk">*</i></label>
+            <input name="name" id="name" />
+          </div>
+          <div>
+            <label for="email">Email<i class="asterisk">*</i></label>
+            <input name="email" id="email" />
+          </div>
+          <div>
+            <label for="phone">Điện thoại<i class="asterisk">*</i></label>
+            <input name="phone" id="phone" />
+          </div>
+        </div>
+        <div class="form-bot">
+          <label for="ct">Nội dung<i class="asterisk">*</i></label>
+          <textarea name="ct" id="ct"></textarea>
+        </div>
+        <button class="submit" type="submit">Gửi tin nhắn</button>
+      </form>
+    </div>
+    <div class="right-sidebar">
+      <img src="assets/image/logo.png" alt="logo" />
+      <div class="sidebar-item sidebar__location">
+        <i class="fa-solid fa-location-dot"></i>
+        <p>01 Công xã Paris, Bến Nghé, Q.1, Tp. HCM.</p>
+      </div>
+      <div class="sidebar-item sidebar__phone">
+        <i class="fa-solid fa-phone"></i>
+        <a href="">111</a>
+      </div>
+      <div class="sidebar-item sidebar__email">
+        <i class="fa-regular fa-envelope"></i>
+        <a href="">ABC@gamil.com.vn</a>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="d-flex justify-content-center">
+    <div class="map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4111229607033!2d106.69644397578399!3d10.779790759130128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f37e6d82451%3A0xe84f59936ced5b45!2zTmjDoCB0aOG7nSDEkOG7qWMgQsOgIFPDoGkgR8Oybg!5e0!3m2!1svi!2s!4v1700629884587!5m2!1svi!2s"
+        width="1600"
+        height="400"
+        style="border: 0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  </div>
+</div>

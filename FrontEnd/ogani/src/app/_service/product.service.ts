@@ -99,4 +99,10 @@ export class ProductService {
   deleteProduct(id: number): Observable<any> {
     return this.http.delete(PRODUCT_API + 'delete/' + id, httpOptions);
   }
+
+  getQuantityById(id: number): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('id', id);
+    return this.http.get(PRODUCT_API + 'quantity', { params: params });
+  }
 }

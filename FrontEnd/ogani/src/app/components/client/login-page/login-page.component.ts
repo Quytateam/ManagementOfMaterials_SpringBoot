@@ -4,6 +4,7 @@ import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/_service/auth.service';
 import { StorageService } from 'src/app/_service/storage.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CartService } from 'src/app/_service/cart.service';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -47,7 +48,8 @@ export class LoginPageComponent implements OnInit {
     private authService: AuthService,
     private storageService: StorageService,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    public cartService: CartService
   ) {}
 
   ngOnInit(): void {}
@@ -61,6 +63,7 @@ export class LoginPageComponent implements OnInit {
         this.isLoggedIn = true;
         this.isLoginFailed = false;
         this.roles = this.storageService.getUser().roles;
+        this.cartService.clearCart();
         this.showSuccess('Đăng nhập thành công!!');
         this.router.navigate(['/']);
       },

@@ -37,7 +37,6 @@ public class TagController {
     public ResponseEntity<List<Tag>> getList(){
         
         List<Tag> list = tagService.getListTag();
-
         return ResponseEntity.ok(list);
     }
 

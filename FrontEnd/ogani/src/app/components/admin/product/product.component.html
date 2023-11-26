@@ -69,7 +69,21 @@
           <p-tableCheckbox [value]="product"></p-tableCheckbox>
         </td>
         <td>{{ product.name }}</td>
+
+        <!-- Add a conditional check for product images -->
         <td>
+          <img
+            [src]="
+              product.images && product.images.length > 0
+                ? 'data:image/jpg;base64,' + product.images[0].data
+                : '../../../../assets/image/no-image.png'
+            "
+            [alt]="product.name"
+            width="100"
+            class="shadow-4"
+          />
+        </td>
+        <!-- <td *ngIf="product.images && product.images.length > 0">
           <img
             src="{{ 'data:image/jpg;base64,' + product.images[0].data }}"
             [alt]="product.name"
@@ -77,7 +91,17 @@
             class="shadow-4"
           />
         </td>
-        <td>{{ product.price | currency : "USD" }}</td>
+        <td *ngIf="!product.images || product.images.length === 0">
+          <img
+            src="../../../../assets/image/no-image.png"
+            alt="no-img"
+            width="100"
+            height="120"
+            class="shadow-4"
+          />
+        </td> -->
+
+        <td>{{ product.price | currency : "VND" }}</td>
         <td>{{ product.quantity }}</td>
         <td>{{ product.category.name }}</td>
         <td>
@@ -119,6 +143,7 @@
         </td>
       </tr>
     </ng-template>
+
     <ng-template pTemplate="summary">
       <div class="flex align-items-center justify-content-between">
         <!-- In total there are {{products ? products.length : 0 }} products. -->
@@ -130,7 +155,7 @@
 <p-dialog
   [(visible)]="showForm"
   [style]="{ width: '30vw' }"
-  header="Product Details"
+  header="Thông tin chi tiết sản phẩm"
   [modal]="true"
   styleClass="p-fluid"
 >
@@ -289,8 +314,19 @@
             }"
           >
             >
+            <!-- <option value="M3">M3</option>
+            <option value="Cái">Cái</option>
             <option value="Miếng">Miếng</option>
             <option value="Kg">Kg</option>
+            <option value="Thùng">Thùng</option>
+            <option value="Hộp">Hộp</option>
+            <option value="Viên">Viên</option> -->
+            <option value="Bịch">Bịch</option>
+            <option value="Thùng">Thùng</option>
+            <option value="Khối">Khối</option>
+            <option value="Viên">Viên</option>
+            <option value="Cuộn">Cuộn</option>
+            <option value="Cái">Cái</option>
           </select>
           <div
             class="invalid-feedback"
@@ -344,6 +380,7 @@
               ></button>
               <button
                 pButton
+                (click)="deleteImage()"
                 class="p-button-danger ml-2 w-auto"
                 icon="pi pi-trash "
                 label="Xóa ảnh"
@@ -375,6 +412,7 @@
               src="{{ 'data:image/jpg;base64,' + image.data }}"
               alt=""
               class="w-full h-full"
+              (dblclick)="deleteImageOnDoubleClick(image)"
             />
             <button
               pButton

@@ -27,11 +27,52 @@
           <div class="product__details__pic__item">
             <img
               class="product__details__pic__item--large"
+              [src]="
+                product.images && product.images.length > 0
+                  ? 'data:image/jpg;base64,' + product.images[0].data
+                  : '../../../../assets/image/no-image.png'
+              "
+              alt="{{ product.name }}"
+            />
+          </div>
+          <!-- <div
+            class="product__details__pic__item"
+            *ngIf="product.images && product.images.length > 0"
+          >
+            <img
+              class="product__details__pic__item--large"
               src="{{ 'data:image/jpg;base64,' + product.images[0].data }}"
               alt="{{ product.name }}"
             />
           </div>
+          <div
+            class="product__details__pic__item"
+            *ngIf="!product.images || product.images.length === 0"
+          >
+            <img
+              src="../../../../assets/image/no-image.png"
+              alt="no-img"
+              width="50"
+              height="full"
+              class="shadow-4"
+            />
+          </div> -->
           <div class="product__details__pic__slider">
+            <img
+              [src]="
+                product.images && product.images.length > 0
+                  ? 'data:image/jpg;base64,' + image.data
+                  : '../../../../assets/image/no-image.png'
+              "
+              alt=""
+              *ngFor="let image of product.images"
+              class="col-3"
+            />
+          </div>
+          <!-- <div
+            class="product__details__pic__slider"
+            *ngIf="product.images && product.images.length > 0"
+          >
             <img
               src="{{ 'data:image/jpg;base64,' + image.data }}"
               alt=""
@@ -39,6 +80,18 @@
               class="col-3"
             />
           </div>
+          <div
+            class="product__details__pic__slider"
+            *ngIf="!product.images || product.images.length === 0"
+          >
+            <img
+              src="../../../../assets/image/no-image.png"
+              alt="no-img"
+              width="100"
+              height="120"
+              class="shadow-4"
+            />
+          </div> -->
         </div>
       </div>
       <div class="col-lg-6 col-md-6">
@@ -53,7 +106,7 @@
             <span>(18 reviews)</span>
           </div>
           <div class="product__details__price">
-            {{ product.price | currency }}
+            {{ product.price | currency : "VND" }}
           </div>
           <p>{{ product.description }}</p>
           <div class="product__details__quantity">
@@ -164,7 +217,9 @@
             class="featured__item__pic set-bg"
             [ngStyle]="{
               'background-image':
-                'url(data:image/jpeg;base64,' + product.images[0].data + ')'
+                product.images && product.images.length > 0
+                  ? 'url(data:image/jpeg;base64,' + product.images[0].data + ')'
+                  : 'url(../../../../assets/image/no-image.png)'
             }"
           >
             <ul class="featured__item__pic__hover">
@@ -181,7 +236,10 @@
                 ></a>
               </li>
               <li>
-                <a href="javascript:void(0)" (click)="addToCart(product)"
+                <a
+                  href="javascript:void(0)"
+                  (click)="addToCart(product)"
+                  [class.disabled]="product.quantity <= 0"
                   ><fa-icon [icon]="bag"></fa-icon
                 ></a>
               </li>
@@ -191,7 +249,7 @@
             <h6>
               <a href="javascript:void(0)">{{ product.name }}</a>
             </h6>
-            <h5>{{ product.price | currency }}</h5>
+            <h5>{{ product.price | currency : "VND" }}</h5>
           </div>
         </div>
       </div>

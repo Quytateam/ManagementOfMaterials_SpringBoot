@@ -38,6 +38,21 @@
               <tr *ngFor="let product of cartService.items">
                 <td class="shoping__cart__item">
                   <img
+                    [src]="
+                      product.images && product.images.length > 0
+                        ? 'data:image/jpg;base64,' + product.images[0].data
+                        : '../../../../assets/image/no-image.png'
+                    "
+                    alt=""
+                    width="100px"
+                  />
+                  <h5>{{ product.name }}</h5>
+                </td>
+                <!-- <td
+                  class="shoping__cart__item"
+                  *ngIf="product.images && product.images.length > 0"
+                >
+                  <img
                     src="{{
                       'data:image/jpg;base64,' + product.images[0].data
                     }}"
@@ -46,8 +61,21 @@
                   />
                   <h5>{{ product.name }}</h5>
                 </td>
+                <td
+                  class="shoping__cart__item"
+                  *ngIf="!product.images || product.images.length === 0"
+                >
+                  <img
+                    src="../../../../assets/image/no-image.png"
+                    alt="no-img"
+                    width="100"
+                    height="120"
+                    class="shadow-4"
+                  />
+                  <h5>{{ product.name }}</h5>
+                </td> -->
                 <td class="shoping__cart__price">
-                  {{ product.price | currency }}
+                  {{ product.price | currency : "VND" }}
                 </td>
                 <td class="shoping__cart__quantity">
                   <div class="quantity">
@@ -70,7 +98,7 @@
                   </div>
                 </td>
                 <td class="shoping__cart__total">
-                  {{ product.subTotal | currency }}
+                  {{ product.subTotal | currency : "VND" }}
                 </td>
                 <td class="shoping__cart__item__close">
                   <button
@@ -118,11 +146,12 @@
           <ul>
             <li>
               Tổng tiền hàng
-              <span>{{ cartService.totalPrice | currency }}</span>
+              <span>{{ cartService.totalPrice | currency : "VND" }}</span>
             </li>
             <li>Sale <span>- 0%</span></li>
             <li>
-              Tổng thanh toán: <span>{{ cartService.total | currency }}</span>
+              Tổng thanh toán:
+              <span>{{ cartService.total | currency : "VND" }}</span>
             </li>
           </ul>
           <a

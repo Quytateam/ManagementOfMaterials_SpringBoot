@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateOrderDetailRequest {
 
-    @NotNull(message="Tên sản phẩm rỗng")
-    @NotEmpty(message = "Tên sản phẩm rỗng")
-    @Size(min=5,max=50,message="Tên sản phẩm từ 5-50 ký tự")
-    private String name;
+    // @NotNull(message="Tên sản phẩm rỗng")
+    // @NotEmpty(message = "Tên sản phẩm rỗng")
+    // @Size(min=5,max=50,message="Tên sản phẩm từ 5-50 ký tự")
+    // private String name;
 
     private long productId;
 

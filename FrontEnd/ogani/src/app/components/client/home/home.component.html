@@ -64,7 +64,9 @@
             class="featured__item__pic set-bg"
             [ngStyle]="{
               'background-image':
-                'url(data:image/jpeg;base64,' + product.images[0].data + ')'
+                product.images && product.images.length > 0
+                  ? 'url(data:image/jpeg;base64,' + product.images[0].data + ')'
+                  : 'url(../../../../assets/image/no-image.png)'
             }"
           >
             <ul class="featured__item__pic__hover">
@@ -81,7 +83,10 @@
                 ></a>
               </li>
               <li>
-                <a href="javascript:void(0)" (click)="addToCart(product)"
+                <a
+                  href="javascript:void(0)"
+                  (click)="addToCart(product)"
+                  [class.disabled]="product.quantity <= 0"
                   ><fa-icon [icon]="bag"></fa-icon
                 ></a>
               </li>
@@ -91,7 +96,7 @@
             <h6>
               <a href="javascript:void(0)">{{ product.name }}</a>
             </h6>
-            <h5>{{ product.price | currency }}</h5>
+            <h5>{{ product.price | currency : "VND" }}</h5>
           </div>
         </div>
       </div>
@@ -139,7 +144,9 @@
             class="featured__item__pic set-bg"
             [ngStyle]="{
               'background-image':
-                'url(data:image/jpeg;base64,' + product.images[0].data + ')'
+                product.images && product.images.length > 0
+                  ? 'url(data:image/jpeg;base64,' + product.images[0].data + ')'
+                  : 'url(../../../../assets/image/no-image.png)'
             }"
           >
             <ul class="featured__item__pic__hover">
@@ -156,7 +163,10 @@
                 ></a>
               </li>
               <li>
-                <a href="javascript:void(0)" (click)="addToCart(product)"
+                <a
+                  href="javascript:void(0)"
+                  (click)="addToCart(product)"
+                  [class.disabled]="product.quantity <= 0"
                   ><fa-icon [icon]="bag"></fa-icon
                 ></a>
               </li>
@@ -166,7 +176,7 @@
             <h6>
               <a href="javascript:void(0)">{{ product.name }}</a>
             </h6>
-            <h5>{{ product.price | currency }}</h5>
+            <h5>{{ product.price | currency : "VND" }}</h5>
           </div>
         </div>
       </div>

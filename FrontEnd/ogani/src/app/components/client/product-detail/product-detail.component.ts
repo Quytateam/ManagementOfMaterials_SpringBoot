@@ -83,13 +83,13 @@ export class ProductDetailComponent implements OnInit {
   addToCart(item: any) {
     this.cartService.getItems();
     this.cartService.addToCart(item, 1);
-    this.showSuccess('Add To Cart Successfully!');
+    this.showSuccess('Thêm vào giỏ hàng thành công!');
   }
 
   addCart(item: any) {
     this.cartService.getItems();
     this.cartService.addToCart(item, this.quantity);
-    this.showSuccess('Add To Cart Successfully!');
+    this.showSuccess('Thêm vào giỏ hàng thành công!');
   }
 
   addToWishList(item: any) {

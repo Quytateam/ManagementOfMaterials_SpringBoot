@@ -129,5 +129,10 @@ public class ProductController {
         return ResponseEntity.ok(new MessageResponse("Product is d  elete"));
     }
 
-
+    @GetMapping("/quantity")
+    @Operation(summary="Lấy số lượng sản phẩm bằng id")
+    public ResponseEntity<?> getQuantityById(@RequestParam("id") long id){
+        long quantity = productService.getQuantityById(id);
+        return ResponseEntity.ok(quantity);
+    }
 }

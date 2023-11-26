@@ -20,6 +20,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { VNPayService } from 'src/app/_service/vnpay.service';
 import { ActivatedRoute } from '@angular/router';
 import { OrderInfoService } from 'src/app/_service/order-info.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-checkout',
@@ -40,6 +41,7 @@ export class CheckoutComponent implements OnInit {
   submitted = false;
   total: number = 0;
   paymentStatus: any;
+  check: any;
 
   // orderForm: any = {
   //   firstname: null,
@@ -85,9 +87,13 @@ export class CheckoutComponent implements OnInit {
     private productService: ProductService,
     private messageService: MessageService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _location: Location
   ) {}
   ngOnInit(): void {
+    if (this.cartService.getItems().length === 0) {
+      this._location.back();
+    }
     this.username = this.storageService.getUser().username;
     this.userId = this.storageService.getUser().id;
     this.getUserInfor();
@@ -98,6 +104,7 @@ export class CheckoutComponent implements OnInit {
     if (this.paymentStatus === 'success') {
       this.actionPlaceOrder();
     }
+    this.checkQuantity();
   }
 
   getUserInfor() {
@@ -184,7 +191,7 @@ export class CheckoutComponent implements OnInit {
     this.cartService.items.forEach((res) => {
       let orderDetail: OrderDetail = new OrderDetail();
       orderDetail.productId = res.id;
-      orderDetail.name = res.name;
+      // orderDetail.name = res.name;
       orderDetail.price = res.price;
       orderDetail.quantity = res.quantity;
       orderDetail.subTotal = res.subTotal;
@@ -227,6 +234,20 @@ export class CheckoutComponent implements OnInit {
           console.log(err);
         },
       });
+  }
+  checkQuantity() {
+    this.check = true;
+    this.cartService.items.forEach((i) => {
+      this.productService.getQuantityById(i.id).subscribe(
+        (res) => {
+          console.log(res - i.quantity);
+          if (res - i.quantity < 0 && this.check === true) {
+            this.check = false;
+          }
+        },
+        (err) => {}
+      );
+    });
   }
   showSuccess(text: string) {
     this.messageService.add({

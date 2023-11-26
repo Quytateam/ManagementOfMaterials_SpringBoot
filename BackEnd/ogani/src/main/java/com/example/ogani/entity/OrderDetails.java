@@ -1,6 +1,8 @@
 package com.example.ogani.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,14 +22,21 @@ import lombok.NoArgsConstructor;
 @Table(name = "order_details")
 public class OrderDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    // @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // private long id;
 
-    @Column(name = "product_id")
-    private long productId;
+    // @Column(name = "product_id")
+    // private long productId;
 
-    private String name;
+    @EmbeddedId
+    private OrderDetailsId id;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
+    private Product product;
+
+    // private String name;
 
     private long price;
 
@@ -36,7 +45,7 @@ public class OrderDetails {
     @Column(name = "sub_total")
     private long subTotal;
 
-    @ManyToOne
-    @JoinColumn(name ="order_id")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name ="order_id", insertable = false, updatable = false)
     private Orders order;
 }

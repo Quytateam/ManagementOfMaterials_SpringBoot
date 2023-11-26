@@ -64,12 +64,33 @@
         </td>
         <td>
           <img
+            [src]="
+              blog.image
+                ? 'data:image/jpg;base64,' + blog.image.data
+                : '../../../../assets/image/no-image.png'
+            "
+            [alt]="blog.title"
+            width="100"
+            class="shadow-4"
+          />
+        </td>
+        <!-- <td *ngIf="blog.images && blog.images.length > 0">
+          <img
             src="{{ 'data:image/jpg;base64,' + blog.image.data }}"
             [alt]="blog.title"
             width="100"
             class="shadow-4"
           />
         </td>
+        <td *ngIf="!blog.images || blog.images.length === 0">
+          <img
+            src="../../../../assets/image/no-image.png"
+            alt="no-img"
+            width="100"
+            height="120"
+            class="shadow-4"
+          />
+        </td> -->
         <td>{{ blog.title }}</td>
         <td>{{ blog.description }}</td>
         <td>{{ blog.content }}</td>
@@ -103,7 +124,7 @@
 <p-dialog
   [(visible)]="showForm"
   [style]="{ width: '30vw' }"
-  header="Product Details"
+  header="Thông tin chi tiết bài blog"
   [modal]="true"
   styleClass="p-fluid"
 >

@@ -75,7 +75,7 @@ export class MyOrderComponent implements OnInit {
           .pipe(
             concatMap((item: any) => {
               return this.productService.updateQuantityProduct(
-                item.productId,
+                item.product.id,
                 item.quantity
               );
             })

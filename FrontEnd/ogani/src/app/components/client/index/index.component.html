@@ -156,8 +156,8 @@
           <div class="header__top__left">
             <ul>
               <!-- <li><i class="fa fa-envelope"></i> hello@gmail.com</li> -->
-              <li><i class="fa fa-envelope"></i></li>
-              <li>Free Shipping for all Order of $99</li>
+              <li><i class="fa fa-envelope"></i>ABC@gamil.com.vn</li>
+              <li>Miễn phí vận chuyển cho mọi đơn hàng từ đ1.000.000</li>
             </ul>
           </div>
         </div>
@@ -182,9 +182,21 @@
               <a href="javascript:void(0)">Pages</a>
               <ul class="header__menu__dropdown">
                 <li><a href="javascript:void(0)">Shop Details</a></li>
-                <li><a href="javascript:void(0)">Shoping Cart</a></li>
-                <li><a href="javascript:void(0)">Check Out</a></li>
-                <li><a href="javascript:void(0)">Blog Details</a></li>
+                <li>
+                  <a href="javascript:void(0)" routerLink="/cart"
+                    >Shoping Cart</a
+                  >
+                </li>
+                <li>
+                  <a href="javascript:void(0)" routerLink="/checkout"
+                    >Check Out</a
+                  >
+                </li>
+                <li>
+                  <a href="javascript:void(0)" routerLink="/blog"
+                    >Blog Details</a
+                  >
+                </li>
               </ul>
             </li>
             <li><a href="javascript:void(0)" routerLink="/blog">Blog</a></li>
@@ -214,6 +226,22 @@
                       <div class="cart-box-image p-2">
                         <a href="javascript:void(0)" class="block"
                           ><img
+                            [src]="
+                              product.images && product.images.length > 0
+                                ? 'data:image/jpg;base64,' +
+                                  product.images[0].data
+                                : '../../../../assets/image/no-image.png'
+                            "
+                            alt=""
+                            width="80px"
+                        /></a>
+                      </div>
+                      <!-- <div
+                        class="cart-box-image p-2"
+                        *ngIf="product.images && product.images.length > 0"
+                      >
+                        <a href="javascript:void(0)" class="block"
+                          ><img
                             src="{{
                               'data:image/jpg;base64,' + product.images[0].data
                             }}"
@@ -221,6 +249,18 @@
                             width="80px"
                         /></a>
                       </div>
+                      <div
+                        *ngIf="!product.images || product.images.length === 0"
+                      >
+                        <a href="javascript:void(0)" class="block"
+                          ><img
+                            src="../../../../assets/image/no-image.png"
+                            alt="no-img"
+                            width="50"
+                            height="50"
+                            class="shadow-4"
+                        /></a>
+                      </div> -->
                       <div class="cart-box-text">
                         <a href="javascript:void(0)">{{ product.name }}</a>
                       </div>
@@ -254,6 +294,22 @@
                       <div class="cart-box-image p-2">
                         <a href="javascript:void(0)" class="block"
                           ><img
+                            [src]="
+                              product.images && product.images.length > 0
+                                ? 'data:image/jpg;base64,' +
+                                  product.images[0].data
+                                : '../../../../assets/image/no-image.png'
+                            "
+                            alt=""
+                            width="80px"
+                        /></a>
+                      </div>
+                      <!-- <div
+                        class="cart-box-image p-2"
+                        *ngIf="product.images && product.images.length > 0"
+                      >
+                        <a href="javascript:void(0)" class="block"
+                          ><img
                             src="{{
                               'data:image/jpg;base64,' + product.images[0].data
                             }}"
@@ -261,11 +317,24 @@
                             width="80px"
                         /></a>
                       </div>
+                      <div
+                        class="cart-box-image p-2"
+                        *ngIf="!product.images || product.images.length === 0"
+                      >
+                        <a href="javascript:void(0)" class="block"
+                          ><img
+                            src="../../../../assets/image/no-image.png"
+                            alt="no-img"
+                            width="50"
+                            height="50"
+                            class="shadow-4"
+                        /></a>
+                      </div> -->
                       <div class="cart-box-text">
                         <a href="javascript:void(0)">{{ product.name }}</a>
                         <div>
                           <span>{{ product.quantity }} x </span
-                          >{{ product.price | currency }}
+                          >{{ product.price | currency : "VND" }}
                         </div>
                       </div>
                       <button
@@ -282,7 +351,7 @@
                   <div class="text-center">
                     <strong>Tổng: </strong
                     ><span class="ml-2">{{
-                      cartService.getTotalPrice() | currency
+                      cartService.getTotalPrice() | currency : "VND"
                     }}</span>
                   </div>
                   <p-divider></p-divider>
@@ -328,6 +397,15 @@
                   >
                     <fa-icon [icon]="bag"></fa-icon>
                     Đơn mua
+                  </a>
+                  <a
+                    class="dropdown-item"
+                    href="javascript:void(0)"
+                    routerLink="/admin"
+                    *ngIf="userRole !== 'ROLE_USER'"
+                  >
+                    <fa-icon [icon]="userIcon"></fa-icon>
+                    Admin
                   </a>
                   <div class="dropdown-divider"></div>
                   <a

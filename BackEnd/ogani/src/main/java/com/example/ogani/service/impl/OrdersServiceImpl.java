@@ -5,13 +5,16 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.ogani.entity.Orders;
+import com.example.ogani.entity.Product;
 import com.example.ogani.entity.OrderDetails;
+import com.example.ogani.entity.OrderDetailsId;
 import com.example.ogani.entity.Users;
 import com.example.ogani.exception.NotFoundException;
 import com.example.ogani.model.request.CreateOrderDetailRequest;
 import com.example.ogani.model.request.CreateOrderRequest;
 import com.example.ogani.repository.OrderDetailsRepository;
 import com.example.ogani.repository.OrdersRepository;
+import com.example.ogani.repository.ProductRepository;
 import com.example.ogani.repository.UsersRepository;
 import com.example.ogani.service.OrdersService;
 
@@ -35,6 +38,9 @@ public class OrdersServiceImpl implements OrdersService {
     @Autowired
     private EntityManager entityManager;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @Override
     public void placeOrder(CreateOrderRequest request) {
         // TODO Auto-generated method stub
@@ -55,9 +61,17 @@ public class OrdersServiceImpl implements OrdersService {
         ordersRepository.save(orders);
         long totalPrice = 0;
         for(CreateOrderDetailRequest rq: request.getOrderDetails()){
+            OrderDetailsId orderDetailsId = new OrderDetailsId();
             OrderDetails orderDetails = new OrderDetails();
-            orderDetails.setProductId(rq.getProductId());
-            orderDetails.setName(rq.getName());
+            Product product = productRepository.findById(rq.getProductId()).orElseThrow(() -> new NotFoundException("Not Found Product With Id:" + rq.getProductId()));
+            orderDetailsId.setProductId(product.getId());
+            orderDetailsId.setOrderId(orders.getId());
+            orderDetails.setId(orderDetailsId);
+            // OrderDetailsId orderDetailsId = new OrderDetailsId();
+            // orderDetails.setId(orderDetailsId);
+            // orderDetails.setProductId(rq.getProductId());
+            orderDetails.setProduct(product);
+            // orderDetails.setName(rq.getName());
             orderDetails.setPrice(rq.getPrice());
             orderDetails.setQuantity(rq.getQuantity());
             orderDetails.setSubTotal(rq.getPrice()* rq.getQuantity());

@@ -31,4 +31,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query(value = "SELECT p FROM Product p WHERE p.name LIKE %:keyword% and enable = 1 ORDER BY p.id DESC")
     List<Product> searchProduct(@Param("keyword") String keyword);
 
+    @Query(value = "SELECT quantity FROM product WHERE id = :id", nativeQuery = true)
+    long getQuantityById(@Param("id") long id);
+
 }

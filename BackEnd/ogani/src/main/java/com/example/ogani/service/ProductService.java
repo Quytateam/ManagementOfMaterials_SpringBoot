@@ -34,4 +34,6 @@ public interface ProductService {
 
     void deleteProduct(long id);
 
+    long getQuantityById(long id);
+
 }

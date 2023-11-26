@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +46,7 @@ public class PaymentController {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         // long amount = total*100;
-        long amount = total*100000;
+        long amount = total*100;
         String bankCode = "NCB";
         
         String vnp_TxnRef = PaymentConfig.getRandomNumber(8);
@@ -70,7 +71,7 @@ public class PaymentController {
         vnp_Params.put("vnp_OrderType", orderType);
 
         vnp_Params.put("vnp_Locale", "vn");
-        vnp_Params.put("vnp_ReturnUrl", PaymentConfig.vnp_ReturnUrl);
+        vnp_Params.put("vnp_ReturnUrl", PaymentConfig.vnp_ReturnUrl+"?amount="+amount);
         vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
 
         Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
@@ -121,15 +122,18 @@ public class PaymentController {
     @GetMapping("payment-callback")
     public ResponseEntity<Boolean> paymentCallback(@RequestParam Map<String, String> queryParams,HttpServletResponse response) throws IOException{
         String vnp_ResponseCode = queryParams.get("vnp_ResponseCode");
+        String amountString = queryParams.get("amount");
+        long amount = Long.parseLong(amountString);
+        // long amount = (Long) session.getAttribute("amount");
         boolean paymentSuccess;
             if ("00".equals(vnp_ResponseCode)) {
-                response.sendRedirect("http://localhost:4200/checkout?paymentStatus=success");
+                response.sendRedirect("http://localhost:4200/payment-success?amount=" + amount);
                 paymentSuccess = true;
             } else if ("24".equals(vnp_ResponseCode)){
-                response.sendRedirect("http://localhost:4200/checkout");
+                response.sendRedirect("http://localhost:4200/payment-failed");
                 paymentSuccess = false;
             } else {
-                response.sendRedirect("http://localhost:4200/checkout");
+                response.sendRedirect("http://localhost:4200/payment-failed");
                 paymentSuccess = false;
                 
             }

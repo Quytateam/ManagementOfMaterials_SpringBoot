@@ -40,7 +40,7 @@ export class ProductComponent implements OnInit {
     ]),
     description: new FormControl('', [
       Validators.required,
-      Validators.minLength(5),
+      Validators.minLength(0),
       Validators.maxLength(1000),
     ]),
     price: new FormControl(0, [Validators.required, Validators.min(0)]),
@@ -78,6 +78,7 @@ export class ProductComponent implements OnInit {
   }
 
   openUpdate(data: any) {
+    this.submitted = false;
     this.listImageChoosen = [];
     this.onUpdate = true;
     this.showForm = true;
@@ -108,7 +109,6 @@ export class ProductComponent implements OnInit {
     this.productService.getListProduct().subscribe({
       next: (res) => {
         this.listProduct = res;
-        console.log(this.listProduct);
       },
       error: (err) => {
         console.log(err);
@@ -272,8 +272,19 @@ export class ProductComponent implements OnInit {
 
   chooseImage() {
     this.listImageChoosen.push(this.imageChoosen);
-    console.log(this.listImageChoosen);
     this.showImage = false;
+  }
+
+  deleteImage() {
+    this.imageService.deleteImage(this.imageChoosen.id).subscribe({
+      next: (res) => {
+        this.getListImage();
+        this.showWarn('Xóa thành công');
+      },
+      error: (err) => {
+        this.showError(err.message);
+      },
+    });
   }
 
   selectImage(event: any, res: any) {
@@ -284,6 +295,15 @@ export class ProductComponent implements OnInit {
     event.target.classList.toggle('choosen');
     this.imageChoosen = res;
     this.disabled = false;
+  }
+
+  deleteImageOnDoubleClick(image: any) {
+    const index = this.listImageChoosen.findIndex(
+      (img: any) => img.id === image.id
+    );
+    if (index !== -1) {
+      this.listImageChoosen.splice(index, 1);
+    }
   }
 
   showSuccess(text: string) {

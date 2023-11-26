@@ -24,7 +24,7 @@ export class DeliveryNoteComponent implements OnInit {
     this.orderService.getListOrder().subscribe({
       next: (res) => {
         this.listOrder = res;
-        console.log(this.listOrder);
+        console.log(true);
       },
       error: (err) => {
         console.log(err);

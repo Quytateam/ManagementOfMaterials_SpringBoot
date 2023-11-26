@@ -134,6 +134,7 @@ export class BlogComponent implements OnInit {
     this.blogService.getList().subscribe({
       next: (res) => {
         this.listBlog = res;
+        console.log(this.listBlog);
       },
       error: (err) => {
         console.log(err);

@@ -47,7 +47,11 @@
               >
                 <div class="blog__sidebar__recent__item__pic">
                   <img
-                    src="{{ 'data:image/jpg;base64,' + blog.image.data }}"
+                    [src]="
+                      blog.image
+                        ? 'data:image/jpg;base64,' + blog.image.data
+                        : '../../../../assets/image/no-image.png'
+                    "
                     alt=""
                     width="75px"
                   />
@@ -64,7 +68,11 @@
       <div class="col-lg-8 col-md-7 order-md-1 order-1">
         <div class="blog__details__text">
           <img
-            src="{{ 'data:image/jpg;base64,' + blog.image.data }}"
+            [src]="
+              blog.image
+                ? 'data:image/jpg;base64,' + blog.image.data
+                : '../../../../assets/image/no-image.png'
+            "
             alt=""
             width="100%"
           />
@@ -131,7 +139,11 @@
         <div class="blog__item">
           <div class="blog__item__pic">
             <img
-              src="{{ 'data:image/jpg;base64,' + blog.image.data }}"
+              [src]="
+                blog.image
+                  ? 'data:image/jpg;base64,' + blog.image.data
+                  : '../../../../assets/image/no-image.png'
+              "
               alt=""
             />
           </div>

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,ActivatedRoute } from '@angular/router';
-import { faHeart, faRetweet, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import { Router, ActivatedRoute } from '@angular/router';
+import {
+  faHeart,
+  faRetweet,
+  faShoppingBag,
+} from '@fortawesome/free-solid-svg-icons';
 import { MessageService } from 'primeng/api';
 import { CartService } from 'src/app/_service/cart.service';
 import { CategoryService } from 'src/app/_service/category.service';
@@ -11,30 +15,28 @@ import { WishlistService } from 'src/app/_service/wishlist.service';
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
-  providers: [MessageService]
-
+  providers: [MessageService],
 })
 export class SearchComponent implements OnInit {
-
-
   heart = faHeart;
   bag = faShoppingBag;
   retweet = faRetweet;
 
   keyword: any;
-  listProduct:any;
-  listProductNewest:any;
-  listCategory :any;
-  rangeValues = [0,100];
+  listProduct: any;
+  listProductNewest: any;
+  listCategory: any;
+  rangeValues = [0, 1000000];
 
   constructor(
     private router: Router,
-    private categoryService:CategoryService,
-    private route:ActivatedRoute,
+    private categoryService: CategoryService,
+    private route: ActivatedRoute,
     private productService: ProductService,
     private cartService: CartService,
-    private messageService:MessageService,
-    private wishlistService:WishlistService){
+    private messageService: MessageService,
+    private wishlistService: WishlistService
+  ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -45,45 +47,48 @@ export class SearchComponent implements OnInit {
     this.getNewestProduct();
   }
 
-  getListProduct(){
+  getListProduct() {
     this.productService.searchProduct(this.keyword).subscribe({
-      next:res =>{
+      next: (res) => {
         this.listProduct = res;
         console.log(this.listProduct);
-      },error: err =>{
+      },
+      error: (err) => {
         console.log(err);
-      }
-    })
+      },
+    });
   }
 
-  getListCategoryEnabled(){
+  getListCategoryEnabled() {
     this.categoryService.getListCategoryEnabled().subscribe({
-      next: res =>{
+      next: (res) => {
         this.listCategory = res;
-      },error: err=>{
+      },
+      error: (err) => {
         console.log(err);
-      }
-    })
+      },
+    });
   }
 
-  getNewestProduct(){
+  getNewestProduct() {
     this.productService.getListProductNewest(4).subscribe({
-      next:res =>{
+      next: (res) => {
         this.listProductNewest = res;
-      },error: err =>{
+      },
+      error: (err) => {
         console.log(err);
-      }
-    })
+      },
+    });
   }
 
-
-  addToCart(item: any){
+  addToCart(item: any) {
+    console.log(item);
     this.cartService.getItems();
-    this.cartService.addToCart(item,1);
+    this.cartService.addToCart(item, 1);
   }
-  
-  addToWishList(item: any){
-    if(!this.wishlistService.productInWishList(item)){
+
+  addToWishList(item: any) {
+    if (!this.wishlistService.productInWishList(item)) {
       this.wishlistService.addToWishList(item);
     }
   }

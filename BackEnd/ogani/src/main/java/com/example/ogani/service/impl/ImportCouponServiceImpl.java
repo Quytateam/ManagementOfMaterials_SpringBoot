@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.ogani.entity.ImportCoupon;
 import com.example.ogani.entity.ImportCouponDetail;
+import com.example.ogani.entity.ImportCouponDetailId;
 import com.example.ogani.entity.Product;
 import com.example.ogani.entity.Supplier;
 import com.example.ogani.entity.Users;
@@ -57,11 +58,15 @@ public class ImportCouponServiceImpl implements ImportCouponService{
         importCouponRepository.save(importCoupon);
         float totalPrice = 0;
         for (CreateImportCouponDetailRequest rq : request.getImportCouponDetail()) {
+            ImportCouponDetailId importCouponDetailId = new ImportCouponDetailId();
             ImportCouponDetail importCouponDetail = new ImportCouponDetail();
             Product product = productRepository.findById(rq.getProductId()).orElseThrow(() -> new NotFoundException("Not Found Product With Id:" + rq.getProductId()));
+            importCouponDetailId.setProductId(product.getId());
+            importCouponDetailId.setimportcouponId(importCoupon.getId());
+            importCouponDetail.setId(importCouponDetailId);
             importCouponDetail.setImportcoupon(importCoupon);
             importCouponDetail.setProduct(product);
-            importCouponDetail.setName(product.getName());
+            // importCouponDetail.setName(product.getName());
             importCouponDetail.setQuantity(rq.getQuantity());
             importCouponDetail.setUnitPrice(rq.getUnitPrice());
             importCouponDetail.setAmount(importCouponDetail.getQuantity() * importCouponDetail.getUnitPrice());

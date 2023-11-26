@@ -11,6 +11,7 @@ import com.example.ogani.exception.NotFoundException;
 import com.example.ogani.model.request.CreateTagRequest;
 import com.example.ogani.repository.TagRepository;
 import com.example.ogani.service.TagService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TagServiceImpl implements TagService {
@@ -19,6 +20,7 @@ public class TagServiceImpl implements TagService {
     private TagRepository tagRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Tag> getListTag() {
         // TODO Auto-generated method stub
         return tagRepository.findAll(Sort.by("id").descending());

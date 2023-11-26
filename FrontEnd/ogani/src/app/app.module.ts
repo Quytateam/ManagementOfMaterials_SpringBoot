@@ -53,6 +53,9 @@ import { DeliveryNoteDetailComponent } from './components/admin/delivery-note-de
 import { SupplierComponent } from './components/admin/supplier/supplier.component';
 import { AccountInfoComponent } from './components/admin/account-info/account-info.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ContactComponent } from './components/client/contact/contact.component';
+import { PaymentFailedComponent } from './components/client/payment-failed/payment-failed.component';
+import { PaymentSuccessComponent } from './components/client/payment-success/payment-success.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,6 +83,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     DeliveryNoteDetailComponent,
     SupplierComponent,
     AccountInfoComponent,
+    ContactComponent,
+    PaymentFailedComponent,
+    PaymentSuccessComponent,
   ],
   imports: [
     BrowserModule,

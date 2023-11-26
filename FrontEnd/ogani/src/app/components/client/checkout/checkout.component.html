@@ -271,16 +271,18 @@
               </div>
               <ul>
                 <li *ngFor="let item of cartService.items">
-                  {{ item.name }} <span>{{ item.subTotal | currency }}</span>
+                  {{ item.name }}
+                  <span>{{ item.subTotal | currency : "VND" }}</span>
                 </li>
               </ul>
               <div class="checkout__order__subtotal">
                 Tổng tiền hàng
-                <span>{{ cartService.totalPrice | currency }}</span>
+                <span>{{ cartService.totalPrice | currency : "VND" }}</span>
               </div>
               <div class="checkout__order__sale">Sale <span>0%</span></div>
               <div class="checkout__order__total">
-                Tổng thanh toán: <span>{{ cartService.total | currency }}</span>
+                Tổng thanh toán:
+                <span>{{ cartService.total | currency : "VND" }}</span>
               </div>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adip elit, sed do
@@ -300,7 +302,9 @@
                   <span class="checkmark"></span>
                 </label>
               </div>
-              <button type="submit" class="site-btn">ĐẶT HÀNG</button>
+              <button type="submit" class="site-btn" [class.disabled]="!check">
+                ĐẶT HÀNG
+              </button>
             </div>
           </div>
         </div>

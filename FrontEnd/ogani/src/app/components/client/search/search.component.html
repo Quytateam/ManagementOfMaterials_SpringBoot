@@ -44,7 +44,8 @@
               [style]="{ background: '#dd2222' }"
             ></p-slider>
             <div class="price-input mt-3">
-              {{ rangeValues[0] | currency }} - {{ rangeValues[1] | currency }}
+              {{ rangeValues[0] | currency : "VND" }} -
+              {{ rangeValues[1] | currency : "VND" }}
             </div>
           </div>
           <div class="sidebar__item">
@@ -59,15 +60,40 @@
                   >
                     <div class="latest-product__item__pic">
                       <img
+                        [src]="
+                          product.images && product.images.length > 0
+                            ? 'data:image/jpg;base64,' + product.images[0].data
+                            : '../../../../assets/image/no-image.png'
+                        "
+                        alt=""
+                      />
+                    </div>
+                    <!-- <div
+                      class="latest-product__item__pic"
+                      *ngIf="product.images && product.images.length > 0"
+                    >
+                      <img
                         src="{{
                           'data:image/jpg;base64,' + product.images[0].data
                         }}"
                         alt=""
                       />
                     </div>
+                    <div
+                      class="latest-product__item__pic"
+                      *ngIf="!product.images || product.images.length === 0"
+                    >
+                      <img
+                        src="../../../../assets/image/no-image.png"
+                        alt="no-img"
+                        width="100"
+                        height="120"
+                        class="shadow-4"
+                      />
+                    </div> -->
                     <div class="latest-product__item__text">
                       <h6>{{ product.name }}</h6>
-                      <span>{{ product.price | currency }}</span>
+                      <span>{{ product.price | currency : "VND" }}</span>
                     </div>
                   </a>
                 </div>
@@ -114,9 +140,11 @@
                     class="featured__item__pic set-bg"
                     [ngStyle]="{
                       'background-image':
-                        'url(data:image/jpeg;base64,' +
-                        product.images[0].data +
-                        ')'
+                        product.images && product.images.length > 0
+                          ? 'url(data:image/jpeg;base64,' +
+                            product.images[0].data +
+                            ')'
+                          : 'url(../../../../assets/image/no-image.png)'
                     }"
                   >
                     <ul class="featured__item__pic__hover">
@@ -138,6 +166,7 @@
                         <a
                           href="javascript:void(0)"
                           (click)="addToCart(product)"
+                          [class.disabled]="product.quantity <= 0"
                           ><fa-icon [icon]="bag"></fa-icon
                         ></a>
                       </li>
@@ -147,7 +176,7 @@
                     <h6>
                       <a href="javascript:void(0)">{{ product.name }}</a>
                     </h6>
-                    <h5>{{ product.price | currency }}</h5>
+                    <h5>{{ product.price | currency : "VND" }}</h5>
                   </div>
                 </div>
               </div>

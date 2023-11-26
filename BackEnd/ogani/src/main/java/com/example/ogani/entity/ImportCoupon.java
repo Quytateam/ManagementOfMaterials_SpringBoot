@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "importcoupon")
+@Table(name = "IMPORTCOUPON")
 public class ImportCoupon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +42,7 @@ public class ImportCoupon {
 
     @Column(name = "total_price")
     private float totalPrice;
-
+    @Column(name = "enable")
     private int enable;
 
     @OneToMany(mappedBy="importcoupon")

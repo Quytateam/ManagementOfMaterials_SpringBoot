@@ -9,6 +9,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.ogani.entity.Image;
 import com.example.ogani.exception.BadRequestException;
 import com.example.ogani.exception.InternalServerException;
+import com.example.ogani.model.response.MessageResponse;
 import com.example.ogani.service.ImageService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -86,5 +88,12 @@ public class ImageController {
 
         throw new BadRequestException("File không hợp lệ");
 
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @Operation(summary="Xóa ảnh bằng id")
+    public ResponseEntity<?> delete(@PathVariable long id){
+        imageService.deleteImage(id);
+        return ResponseEntity.ok(new MessageResponse("Xóa thành công"));
     }
 }

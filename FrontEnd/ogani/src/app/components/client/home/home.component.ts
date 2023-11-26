@@ -110,7 +110,7 @@ export class HomeComponent implements OnInit {
 
   addToCart(item: any) {
     this.cartService.getItems();
-    this.showSuccess('Add To Cart Successfully!');
+    this.showSuccess('Thêm vào giỏ hàng thành công!');
     this.cartService.addToCart(item, 1);
   }
 

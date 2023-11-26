@@ -100,7 +100,7 @@ CREATE TABLE importcoupon_detail(
     id NUMBER(19, 0) GENERATED ALWAYS AS IDENTITY NOT NULL,
     importcoupon_id NUMBER(19,0) NOT NULL,
     product_id NUMBER(19,0) NOT NULL,
-    name VARCHAR2(255),
+    -- name VARCHAR2(255),
     quantity NUMBER(10, 0),
     unit_price NUMBER(10, 2),
     amount NUMBER(10, 2),
@@ -164,7 +164,7 @@ CREATE TABLE orders (
 CREATE TABLE order_details (
   id NUMBER(19, 0) GENERATED ALWAYS AS IDENTITY NOT NULL,
   product_id NUMBER(19, 0),
-  name VARCHAR2(255),
+  -- name VARCHAR2(255),
   price NUMBER(19, 0),
   quantity NUMBER(10, 0),
   sub_total NUMBER(19, 0),

@@ -26,6 +26,10 @@ import { DeliveryNoteDetailComponent } from './components/admin/delivery-note-de
 import { SupplierComponent } from './components/admin/supplier/supplier.component';
 import { AccountComponent } from './components/admin/account/account.component';
 import { AccountInfoComponent } from './components/admin/account-info/account-info.component';
+import { ContactComponent } from './components/client/contact/contact.component';
+import { PaymentSuccessComponent } from './components/client/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './components/client/payment-failed/payment-failed.component';
+import { BlockPaymentService } from './_service/block-payment.service';
 
 const routes: Routes = [
   {
@@ -74,6 +78,9 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
       },
       { path: 'search/:keyword', component: SearchComponent },
+      { path: 'contact', component: ContactComponent },
+      { path: 'payment-success', component: PaymentSuccessComponent },
+      { path: 'payment-failed', component: PaymentFailedComponent },
     ],
   },
   { path: 'login', component: LoginPageComponent },

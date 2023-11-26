@@ -39,6 +39,7 @@ export class IndexComponent implements OnInit {
   logoutIcon = faRightFromBracket;
   bars = faBars;
   submitted = false;
+  userRole: any;
 
   showDepartment = false;
 
@@ -102,6 +103,12 @@ export class IndexComponent implements OnInit {
     this.wishlistService.loadWishList();
     this.cartService.loadCart();
     this.http.get('http://localhost:8080/hello/').subscribe((res) => {});
+    this.getUser();
+    // console.log(this.cartService.getItems());
+  }
+
+  getUser() {
+    this.userRole = this.storageService.getUser().roles[0];
   }
 
   showDepartmentClick() {
@@ -192,6 +199,7 @@ export class IndexComponent implements OnInit {
         this.isLoggedIn = false;
         this.authModal = false;
         this.showSuccess('Bạn đã đăng xuất!!');
+        this.cartService.clearCart();
         this.router.navigate(['/']);
       },
       error: (err) => {
