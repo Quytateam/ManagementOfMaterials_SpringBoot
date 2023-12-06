@@ -95,9 +95,10 @@
                     <thead>
                       <tr class="row">
                         <th class="col-1">#</th>
-                        <th class="col-5">Tên sản phẩm</th>
+                        <th class="col-4">Tên sản phẩm</th>
                         <th class="col-2">Gía</th>
                         <th class="col-2">Số lượng</th>
+                        <th class="col-1">ĐVT</th>
                         <th class="col-2">Thành tiền</th>
                       </tr>
                     </thead>
@@ -107,9 +108,10 @@
                       >
                         <tr class="row">
                           <td class="col-1">{{ i + 1 }}</td>
-                          <td class="col-5">{{ item.product.name }}</td>
+                          <td class="col-4">{{ item.product.name }}</td>
                           <td class="col-2">{{ item.price }}</td>
                           <td class="col-2">{{ item.quantity }}</td>
+                          <td class="col-1">{{ item.product.unit }}</td>
                           <td class="col-2">{{ item.subTotal }}</td>
                         </tr>
                       </ng-container>

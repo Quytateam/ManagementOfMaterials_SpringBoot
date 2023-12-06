@@ -114,7 +114,6 @@ public class ProductServiceImpl implements ProductService {
         }
         productRepository.save(product);
     }
-
     @Override
     public void deleteProduct(long id) {
         // TODO Auto-generated method stub
@@ -135,7 +134,6 @@ public class ProductServiceImpl implements ProductService {
         // TODO Auto-generated method stub
         return productRepository.getListByPrice();
     }
-
     @Override
     public List<Product> findRelatedProduct(long id){
         List<Product> list = productRepository.findRelatedProduct(id);

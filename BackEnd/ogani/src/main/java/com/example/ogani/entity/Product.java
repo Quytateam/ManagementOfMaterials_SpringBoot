@@ -19,7 +19,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "description",columnDefinition = "TEXT")
+    @Column(name = "DESCRIPTION",columnDefinition = "TEXT")
     @Lob
     private String description;
 
